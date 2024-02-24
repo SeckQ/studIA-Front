@@ -10,6 +10,7 @@ import FAIcon from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
+import TusMaterias from "./screens/TusMaterias";
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -59,6 +60,12 @@ const Navigation = () => {
                             name="InicioSesion"
                             component={InicioSesion}
                             options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="TusMaterias"
+                            label="Tus Materias"
+                            component={TusMaterias}
+                            options={{headerShown: true}}
                         />
                         <Stack.Screen
                             name="Nota"
