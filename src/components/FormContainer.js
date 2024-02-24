@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Image } from "expo-image";
-import { Color, Border, FontSize, FontFamily } from "../GlobalStyles";
+import { Color, Border, FontSize, FontFamily } from "../../GlobalStyles";
 
 const FormContainer = () => {
   return (
@@ -10,14 +10,14 @@ const FormContainer = () => {
       <Image
         style={styles.avatar1Icon}
         contentFit="cover"
-        source={require("../assets/avatar-1.png")}
+        source={require("../../assets/avatar-1.png")}
       />
       <View style={[styles.button1, styles.buttonLayout]}>
         <Text style={[styles.text, styles.textPosition]} />
         <Image
           style={[styles.searchIcon, styles.textPosition]}
           contentFit="cover"
-          source={require("../assets/search.png")}
+          source={require("../../assets/search.png")}
         />
       </View>
       <View style={[styles.button2, styles.buttonLayout]}>
@@ -25,7 +25,7 @@ const FormContainer = () => {
         <Image
           style={[styles.searchIcon, styles.textPosition]}
           contentFit="cover"
-          source={require("../assets/bell.png")}
+          source={require("../../assets/bell.png")}
         />
       </View>
     </View>
