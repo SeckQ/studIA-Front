@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Image, TextInput } from "react-native";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { Image, TextInput } from "react-native";import { StyleSheet, Text, View, Pressable } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontSize, FontFamily, Padding } from "../GlobalStyles";
 import axios from "axios";
@@ -18,7 +17,7 @@ const InicioSesion = () => {
         password: password,
       });
       if(response.data.authenticated){
-        navigation.navigate("Inicio")
+        navigation.navigate("Repaso")
       } else {
         Alert.alert('Error','Credenciales incorrectas');
       }

@@ -14,6 +14,7 @@ import Repaso from "./screens/Repaso";
 import Apuntes from "./screens/Apuntes";
 import Nota from "./screens/Nota";
 import RegistroNotas from "./screens/RegistroNotas";
+import ListaNotas from "./screens/ListaNotas";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,7 +54,7 @@ export default function App() {
           <>
             <Stack.Screen
               name="InicioSesion"
-              component={InicioSesion}
+              component={ListaNotas}
               options={{ headerShown: false }}
             />
             <Stack.Screen
