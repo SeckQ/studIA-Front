@@ -14,37 +14,7 @@ import Perfil from "./screens/Perfil";
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-function TabsNav() {
-    return (
-        <Tabs.Navigator
-            screenOptions={({ route }) => {
-                return {
-                    headerShown: false,
-                    tabBarIcon: ({ focused, size }) => {
-                        let icon = "";
-                        switch (route.name) {
-                            case "Inicio":
-                                icon = "home";
-                                break;
-                            case "Notificaciones":
-                                icon="bell";
-                                break;
-                            case "Perfil":
-                                icon = "user";
-                                break;
-                        }
 
-                        return <FAIcon name={icon} size={size} color="#000000" />;
-                    },
-                };
-            }}
-        >
-            <Tabs.Screen name="Inicio" component={Inicio} />
-            <Tabs.Screen name="Notificaciones" component={Notificaciones} />
-            <Tabs.Screen name="Perfil" component={Perfil} />
-        </Tabs.Navigator>
-    );
-}
 
 const Navigation = () => {
     const [loaded, setLoaded] = React.useState(false);
@@ -102,6 +72,36 @@ const Navigation = () => {
     );
 };
 
+function TabsNav() {
+    return (
+        <Tabs.Navigator
+            screenOptions={({ route }) => {
+                return {
+                    headerShown: false,
+                    tabBarIcon: ({ focused, size }) => {
+                        let icon = "";
+                        switch (route.name) {
+                            case "Inicio":
+                                icon = "home";
+                                break;
+                            case "Notificaciones":
+                                icon="bell";
+                                break;
+                            case "Perfil":
+                                icon = "user";
+                                break;
+                        }
 
+                        return <FAIcon name={icon} size={size} color="#000000" />;
+                    },
+                };
+            }}
+        >
+            <Tabs.Screen name="Inicio" component={Inicio} />
+            <Tabs.Screen name="Notificaciones" component={Notificaciones} />
+            <Tabs.Screen name="Perfil" component={Perfil} />
+        </Tabs.Navigator>
+    );
+}
 
 export default Navigation;
