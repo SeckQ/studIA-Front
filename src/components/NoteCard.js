@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Text, StyleSheet, View, ImageSourcePropType } from "react-native";
 import { Image } from "expo-image";
-import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
+import { FontSize, FontFamily, Color, Border } from "../../GlobalStyles";
 
 const getStyleValue = (key, value) => {
   if (value === undefined) return;
@@ -25,7 +25,7 @@ const NoteCard = ({ noteIconText, iconImageUrl, propTop }) => {
       <Image
         style={[styles.chevronRightLarge1, styles.iconButton2Position]}
         contentFit="cover"
-        source={require("../assets/chevron-right-large-1.png")}
+        source={require("../../assets/chevron-right-large-1.png")}
       />
     </View>
   );

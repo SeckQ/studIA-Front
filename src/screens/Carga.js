@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
-import { Color } from "../GlobalStyles";
+import { Color } from "../../GlobalStyles";
 
 const Carga = () => {
   return (
@@ -9,7 +9,7 @@ const Carga = () => {
       <Image
         style={styles.frameChild}
         contentFit="cover"
-        source={require("../assets/frame-10.png")}
+        source={require("../../assets/frame-10.png")}
       />
     </View>
   );
