@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
@@ -46,7 +45,7 @@ const TusMaterias = () => {
     //     </View>
     // );
 };
-=======
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -58,12 +57,11 @@ export default function TusMaterias() {
         </View>
     );
 }
->>>>>>> 8710510d44f6c0ad91fa1f8cdedf977fd0df379d
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-<<<<<<< HEAD
+
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
@@ -75,10 +73,10 @@ const styles = StyleSheet.create({
 });
 
 export default TusMaterias;
-=======
+
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
 });
->>>>>>> 8710510d44f6c0ad91fa1f8cdedf977fd0df379d
+
