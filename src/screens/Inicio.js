@@ -66,8 +66,7 @@ const Inicio = () => {
                             }}
                         />
                     </Appbar.Header>
-                    <View style={styles.containerMaterias}>
-                    </View>
+
 
                     <ScrollView horizontal style={styles.scrollView}>
                         <Card style={styles.card}>

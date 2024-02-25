@@ -1,5 +1,5 @@
-import {Appbar, Avatar, Card} from "react-native-paper";
-import {StyleSheet, Text, View} from "react-native";
+import {Appbar} from "react-native-paper";
+import {StyleSheet, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 
 
@@ -18,7 +18,7 @@ const PerfilMateriaInformacion = () => {
                         </View>
                     )}
                 />
-                <Appbar.Content title="Nombre" />
+                <Appbar.Content title="nombre" />
                 <Appbar.Action icon="chevron-right" size={30} onPress={() => {navigation.navigate('TusMaterias');}} />
             </Appbar.Header>
         </View>
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
         borderColor: '#adadad', // Color del borde
         backgroundColor: 'transparent', // Fondo transparent
         borderRadius: 8,
+        margin: 0,
 
     },
     circle: {
