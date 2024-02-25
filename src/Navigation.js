@@ -10,41 +10,14 @@ import FAIcon from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
+import TusMaterias from "./screens/TusMaterias";
+import RegistroNotas from "./screens/RegistroNotas";
+
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-function TabsNav() {
-    return (
-        <Tabs.Navigator
-            screenOptions={({ route }) => {
-                return {
-                    headerShown: false,
-                    tabBarIcon: ({ focused, size }) => {
-                        let icon = "";
-                        switch (route.name) {
-                            case "Inicio":
-                                icon = "home";
-                                break;
-                            case "Notificaciones":
-                                icon="bell";
-                                break;
-                            case "Perfil":
-                                icon = "user";
-                                break;
-                        }
 
-                        return <FAIcon name={icon} size={size} color="#000000" />;
-                    },
-                };
-            }}
-        >
-            <Tabs.Screen name="Inicio" component={Inicio} />
-            <Tabs.Screen name="Notificaciones" component={Notificaciones} />
-            <Tabs.Screen name="Perfil" component={Perfil} />
-        </Tabs.Navigator>
-    );
-}
 
 const Navigation = () => {
     const [loaded, setLoaded] = React.useState(false);
@@ -80,6 +53,12 @@ const Navigation = () => {
                     />
                 ) : (
                     <>
+
+                        <Stack.Screen
+                            name="RegistroNotas"
+                            component={RegistroNotas}
+                            options={{headerShown: false}}
+                        />
                         <Stack.Screen
                             name="Tabs"
                             component={TabsNav}
@@ -89,6 +68,12 @@ const Navigation = () => {
                             name="InicioSesion"
                             component={InicioSesion}
                             options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="TusMaterias"
+                            label="Tus Materias"
+                            component={TusMaterias}
+                            options={{headerShown: true}}
                         />
                         <Stack.Screen
                             name="Nota"
@@ -102,6 +87,36 @@ const Navigation = () => {
     );
 };
 
+function TabsNav() {
+    return (
+        <Tabs.Navigator
+            screenOptions={({ route }) => {
+                return {
+                    headerShown: false,
+                    tabBarIcon: ({ focused, size }) => {
+                        let icon = "";
+                        switch (route.name) {
+                            case "Inicio":
+                                icon = "home";
+                                break;
+                            case "Notificaciones":
+                                icon="bell";
+                                break;
+                            case "Perfil":
+                                icon = "user";
+                                break;
+                        }
 
+                        return <FAIcon name={icon} size={size} color="#000000" />;
+                    },
+                };
+            }}
+        >
+            <Tabs.Screen name="Inicio" component={Inicio} />
+            <Tabs.Screen name="Notificaciones" component={Notificaciones} />
+            <Tabs.Screen name="Perfil" component={Perfil} />
+        </Tabs.Navigator>
+    );
+}
 
 export default Navigation;
