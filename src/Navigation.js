@@ -11,6 +11,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
 import TusMaterias from "./screens/TusMaterias";
+import RegistroNotas from "./screens/RegistroNotas";
+
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
@@ -51,6 +53,12 @@ const Navigation = () => {
                     />
                 ) : (
                     <>
+
+                        <Stack.Screen
+                            name="RegistroNotas"
+                            component={RegistroNotas}
+                            options={{headerShown: false}}
+                        />
                         <Stack.Screen
                             name="Tabs"
                             component={TabsNav}
