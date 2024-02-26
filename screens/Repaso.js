@@ -3,18 +3,22 @@ import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import PreguntaCard from '../components/PreguntaCard';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
+import Config from "../config/Config";
 
-const Repaso = () => {
+
+const Repaso = ({ route }) => {
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [respuestasUsuario, setRespuestasUsuario] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const { content } = route.params;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.post('http://192.168.1.6:5000/generate-questions', {
-          text: "La inteligencia artificial es un campo emocionante que ha experimentado un rápido avance en los últimos años.",
+        console.log('CONTENT ENVIADO', content);
+        const response = await axios.post(`${Config.apiUrl}/generate-questions`, {
+          text: content, // Utiliza el contenido pasado como texto para generar preguntas
           quantity: 3,
           temperature: 0.8
         });

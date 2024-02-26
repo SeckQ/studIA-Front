@@ -3,6 +3,8 @@ import { Image, TextInput } from "react-native";import { StyleSheet, Text, View,
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontSize, FontFamily, Padding } from "../GlobalStyles";
 import axios from "axios";
+import Config from "../config/Config";
+
 
 const InicioSesion = () => {
   const navigation = useNavigation();
@@ -12,12 +14,12 @@ const InicioSesion = () => {
   const handleLogin = async () => {
     try {
       console.log("Presionaste el botón de inicio de sesión...");
-      const response = await axios.post('http://192.168.1.6:5000/login',{
+      const response = await axios.post(`${Config.apiUrl}/login`,{
         username: email,
         password: password,
       });
       if(response.data.authenticated){
-        navigation.navigate("Repaso")
+        navigation.navigate("Inicio")
       } else {
         Alert.alert('Error','Credenciales incorrectas');
       }

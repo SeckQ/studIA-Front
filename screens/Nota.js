@@ -1,91 +1,99 @@
-import React, { useRef, useState, Component } from 'react';
-import { View, StyleSheet, Button, TextInput } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { Button } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
 import { RichEditor, RichToolbar } from 'react-native-pell-rich-editor';
-import {actions} from './const';
+import { actions } from './const';
 
 const Nota = () => {
-  const richText = useRef();
-  const [formattedText, setFormattedText] = useState('');
-  const [inputText, setInputText] = useState('');
+    const richText = useRef();
+    const [formattedText, setFormattedText] = useState('');
+    const navigation = useNavigation(); // Obtiene la navegación
 
-  const handleSaveFormattedText = async () => {
-    const html = await richText.current?.getContentHtml();
-    setFormattedText(html);
-  };
+    const handleSaveFormattedText = async () => {
+        const html = await richText.current?.getContentHtml();
+        setFormattedText(html);
+        navigation.navigate('DetallesNota', { contenido: html }); // Navega a NuevaPantalla y pasa el contenido
+    };
 
-  return (
-    <View style={styles.container}>
-      <RichEditor
-        ref={richText}
-        style={styles.richText}
-        placeholder={'Empieza a escribir...'}
-      />
-      <RichToolbar
-        style={styles.richToolbar}
-        getEditor={() => richText.current}
-        actions={[
+    const handleCancel = () => {
+        // Aquí puedes agregar la lógica para cancelar
+        console.log('Nota cancelada');
+    };
 
-          'keyboard',
-          'bold',
-          'italic',
-          'underline',
-          'orderedList',
-          'checkboxList',
-          actions.outdent,
-          actions.alignRight,
-          actions.fontSize,
-          'redo',
-          'undo',
-          'removeFormat',
-          'heading1',
-          'heading2',
-          'heading3',
-          'heading4',
-          'heading5',
-          'heading6',
-          'fontSize',
-          'link',
-        ]}
-      />
-      <View style={styles.buttonContainer}>
-        <Button title="Guardar Nota" onPress={handleSaveFormattedText} />
-      </View>
-      <TextInput
-        placeholder="Nota con formato"
-        multiline
-        value={formattedText}
-        onChangeText={setInputText}
-        style={styles.textInput}
-      />
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <Text style={styles.title}>Crear Nota</Text>
+            <RichEditor
+                ref={richText}
+                style={styles.richText}
+                placeholder={'Empieza a escribir...'}
+            />
+            <RichToolbar
+                style={styles.richToolbar}
+                getEditor={() => richText.current}
+                actions={[
+                    'keyboard',
+                    'bold',
+                    'italic',
+                    'underline',
+                    'orderedList',
+                    'checkboxList',
+                    actions.outdent,
+                    actions.alignRight,
+                    actions.fontSize,
+                    'redo',
+                    'undo',
+                    'removeFormat',
+                    'heading1',
+                    'heading2',
+                    'heading3',
+                    'heading4',
+                    'heading5',
+                    'heading6',
+                    'fontSize',
+                    'link',
+                ]}
+            />
+            <View style={styles.buttonContainer}>
+                <Button mode="outlined" onPress={handleCancel} color="red" style={styles.button}>
+                    Cancelar
+                </Button>
+                <Button mode="contained" onPress={handleSaveFormattedText} style={styles.button}>
+                    Guardar Nota
+                </Button>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-  },
-  richText: {
-    top: 10,
-    flex: 1,
-    backgroundColor: 'transparent',
-  },
-  richToolbar: {
-    height: 50,
-    backgroundColor: '#F5FCFF',
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 10,
-  },
-  textInput: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'gray',
-    padding: 10,
-  },
+    container: {
+        flex: 1,
+        padding: 10,
+    },
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 10,
+    },
+    richText: {
+        flex: 1,
+        backgroundColor: 'transparent',
+    },
+    richToolbar: {
+        height: 50,
+        backgroundColor: '#F5FCFF',
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginVertical: 10,
+    },
+    button: {
+        marginHorizontal: 5,
+    },
 });
 
 export default Nota;
