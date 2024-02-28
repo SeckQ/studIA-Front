@@ -12,6 +12,8 @@ import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
 import TusMaterias from "./screens/TusMaterias";
 import PerfilMateria from "./screens/PerfilMateria";
+import ListaNotas from "./screens/ListaNotas";
+import Repaso from "./screens/Repaso";
 
 
 const Stack = createNativeStackNavigator();
@@ -53,11 +55,26 @@ const Navigation = () => {
                     />
                 ) : (
                     <>
+
+
+                        <Stack.Screen
+                            name="ListaNotas"
+                            component={ListaNotas}
+                            options={{headerShown: false}}
+                        />
+
+                        <Stack.Screen
+                            name="Repaso"
+                            component={Repaso}
+                            options={{headerShown: true}}
+                        />
+
                         <Stack.Screen
                             name="PerfilMateria"
                             component={PerfilMateria}
                             options={{headerShown: true}}
                         />
+
                         <Stack.Screen
                             name="Tabs"
                             component={TabsNav}

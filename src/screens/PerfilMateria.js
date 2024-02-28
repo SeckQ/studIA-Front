@@ -146,7 +146,7 @@ const PerfilMateria = () => {
                             </Card>
                         </Card>
 
-                        <Card style={styles.card2}>
+                         <Card style={styles.card2}>
                             <View style={[styles.card2, {justifyContent: 'space-between'}]}>
                                 <View>
                                     <Text variant="titleMedium" style={[styles.title2, {color: "#ff9514"}]}>En PROGRESO 6</Text>
