@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Button } from 'react-native-paper';
 import {View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import { Card } from 'react-native-paper';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 import MyTabs from "../MyTabs";
-
 
 const colors = [
     "#FF5733",
@@ -42,45 +40,15 @@ const TusMaterias = () => {
     const [newSemester, setNewSemester] = useState(0);
     const [shouldUpdate, setShouldUpdate] = useState(false);
 
-
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:5000/subjects/1');
                 setSubjects(response.data.subjects);
-
-                console.log(subjects)
-
             } catch (error) {
                 console.error('Error fetching Subjects:', error);
             }
         };
-
-        console.log(subjects);
-        fetchSubjects();
-    }, []);
-
-    const renderSubjectItem = ({ item }) => (
-        <Card style={styles.card}>
-            <Card.Title title={item.name} subtitle={`Professor: ${item.professor}`} />
-            <Card.Content>
-                <Text>Semester: {item.semester}</Text>
-            </Card.Content>
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-            <Card.Actions>
-                <Button>Ver detalles</Button>
-            </Card.Actions>
-        </Card>
-    );
-
-    return (
-        <View style={styles.container}>
-            <FlatList
-                data={subjects}
-                keyExtractor={(item) => item.subject_id.toString()}
-                renderItem={renderSubjectItem}
-            />
-        </View>
         fetchSubjects();
     }, [shouldUpdate]);
 
@@ -109,9 +77,9 @@ const TusMaterias = () => {
 
         const initials = item.name ?
             item.name
-            .split(' ')
-            .map(word => word.charAt(0))
-            .join(''):'';
+                .split(' ')
+                .map(word => word.charAt(0))
+                .join(''):'';
 
         const circleColor = getRandomColor();
 
@@ -196,17 +164,10 @@ const TusMaterias = () => {
             </View>
             <MyTabs/>
         </ScrollView>
-
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f8f8f8',
-        paddingHorizontal: 20,
-        paddingTop: 20,
-    },
     card: {
         marginTop: 10,
         marginBottom: 10,
@@ -291,4 +252,3 @@ const styles = StyleSheet.create({
 });
 
 export default TusMaterias;
-
