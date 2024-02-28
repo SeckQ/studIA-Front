@@ -10,9 +10,81 @@ import FAIcon from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
+import TusMaterias from "./screens/TusMaterias";
+import PerfilMateria from "./screens/PerfilMateria";
+
 
 const Stack = createNativeStackNavigator();
 const Tabs = createBottomTabNavigator();
+
+
+
+const Navigation = () => {
+    const [loaded, setLoaded] = React.useState(false);
+
+    let [fontsLoaded] = useFonts({
+        'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
+        'Epilogue-Bold': require('../assets/fonts/Epilogue-Bold.ttf'),
+        'Inter-Bold': require('../assets/fonts/Inter-Bold.ttf'),
+        'Inter-Medium': require('../assets/fonts/Inter-Medium.ttf'),
+        'Inter-Light': require('../assets/fonts/Inter-Light.ttf'),
+        'Epilogue-SemiBold': require('../assets/fonts/Epilogue-SemiBold.ttf'),
+        'Epilogue-Regular': require('../assets/fonts/Epilogue-Regular.ttf'),
+    });
+
+    React.useEffect(() => {
+        setTimeout(() => {
+            setLoaded(true);
+        }, 1000);
+    }, []);
+
+    if (!fontsLoaded) {
+        return null;
+    }
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                {!loaded ? (
+                    <Stack.Screen
+                        name="Carga"
+                        component={Carga}
+                        options={{headerShown: false}}
+                    />
+                ) : (
+                    <>
+                        <Stack.Screen
+                            name="Tabs"
+                            component={TabsNav}
+                            options={{ headerShown: false }}
+                        />
+                        <Stack.Screen
+                            name="RegistroNotas"
+                            component={PerfilMateria}
+                            options={{headerShown: true}}
+                        />
+                        <Stack.Screen
+                            name="TusMaterias"
+                            label="Tus Materias"
+                            component={TusMaterias}
+                            options={{headerShown: true}}
+                        />
+                        <Stack.Screen
+                            name="Nota"
+                            component={Nota}
+                            options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="InicioSesion"
+                            component={InicioSesion}
+                            options={{headerShown: false}}
+                        />
+                    </>
+                )}
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
 
 function TabsNav() {
     return (
@@ -45,63 +117,5 @@ function TabsNav() {
         </Tabs.Navigator>
     );
 }
-
-const Navigation = () => {
-    const [loaded, setLoaded] = React.useState(false);
-
-    let [fontsLoaded] = useFonts({
-        'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
-        'Epilogue-Bold': require('../assets/fonts/Epilogue-Bold.ttf'),
-        'Inter-Bold': require('../assets/fonts/Inter-Bold.ttf'),
-        'Inter-Medium': require('../assets/fonts/Inter-Medium.ttf'),
-        'Inter-Light': require('../assets/fonts/Inter-Light.ttf'),
-        'Epilogue-SemiBold': require('../assets/fonts/Epilogue-SemiBold.ttf'),
-        'Epilogue-Regular': require('../assets/fonts/Epilogue-Regular.ttf'),
-    });
-
-    React.useEffect(() => {
-        setTimeout(() => {
-            setLoaded(true);
-        }, 3000);
-    }, []);
-
-    if (!fontsLoaded) {
-        return null;
-    }
-
-    return (
-        <NavigationContainer>
-            <Stack.Navigator screenOptions={{headerShown: false}}>
-                {!loaded ? (
-                    <Stack.Screen
-                        name="Carga"
-                        component={Carga}
-                        options={{headerShown: false}}
-                    />
-                ) : (
-                    <>
-                        <Stack.Screen
-                            name="Tabs"
-                            component={TabsNav}
-                            options={{ headerShown: false }}
-                        />
-                        <Stack.Screen
-                            name="InicioSesion"
-                            component={InicioSesion}
-                            options={{headerShown: false}}
-                        />
-                        <Stack.Screen
-                            name="Nota"
-                            component={Nota}
-                            options={{headerShown: false}}
-                        />
-                    </>
-                )}
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-};
-
-
 
 export default Navigation;

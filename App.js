@@ -1,29 +1,32 @@
 import { SafeAreaView, StyleSheet } from "react-native";
 import Navegacion from "./src/Navigation";
-import MyTabs from "./src/MyTabs";
-import {NavigationContainer} from "@react-navigation/native";
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <MyTabs/>
-        </NavigationContainer>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Navegacion />
+        </SafeAreaView>
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'red',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
+// import { SafeAreaView, StyleSheet } from "react-native";
+// import Navegacion from "./src/Navigation";
+// import MyTabs from "./src/MyTabs";
+// import {NavigationContainer} from "@react-navigation/native";
+//
 // export default function App() {
 //     return (
-//         <SafeAreaView style={{ flex: 1 }}>
-//             <Navegacion />
-//         </SafeAreaView>
+//         <NavigationContainer>
+//             <MyTabs/>
+//         </NavigationContainer>
 //     );
 // }
+//
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         backgroundColor: 'red',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//     },
+// });

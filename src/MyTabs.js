@@ -5,14 +5,20 @@ import NoteCard from "./components/NoteCard";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
 import TusMaterias from "./screens/TusMaterias";
+import Inicio from "./screens/Inicio";
+import {useFonts} from "expo-font";
+import {NavigationContainer} from "@react-navigation/native";
+import Carga from "./screens/Carga";
+import PerfilMateria from "./screens/PerfilMateria";
+import Nota from "./screens/Nota";
 
 const Tab = createBottomTabNavigator();
 
 const MyTabs =() => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name={'Inicio'} component={NoteCard} options={{
-                tabBarLabel: 'InicioSesion',
+        <Tab.Navigator initialRouteName="Inicio">
+            <Tab.Screen name={'Inicio'} component={Inicio} options={{
+                tabBarLabel: 'Inicio',
                 tabBarIcon: ({color, size}) => (
                     <MaterialCommunityIcons name={'home'} color={color} size={size}/>
                 )
