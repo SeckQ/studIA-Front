@@ -1,12 +1,12 @@
 import * as React from "react";
-import {Appbar, Button, Card, Text, Icon, Avatar} from 'react-native-paper';
+import {Appbar, Button} from 'react-native-paper';
 import {StyleSheet, ScrollView, Image, View} from "react-native";
 import {useNavigation} from "@react-navigation/native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import PerfilMateriaInformacion from "../components/PerfilMateriaInformacion";
 import PerfilMateriaCard from "../components/PerfilMateriaCard";
 
-const RegistroNotas = () => {
+const PerfilMateria = () => {
 
     const navigation = useNavigation();
 
@@ -20,7 +20,7 @@ const RegistroNotas = () => {
                         color="#7930D8"
                         size={77}
                     />
-                    <Appbar.Button></Appbar.Button>
+
                 </Appbar.Header>
 
 
@@ -57,7 +57,6 @@ const RegistroNotas = () => {
 
                 <PerfilMateriaCard></PerfilMateriaCard>
 
-
             </ScrollView>
         </SafeAreaView>
 
@@ -86,4 +85,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default RegistroNotas;
+export default PerfilMateria;

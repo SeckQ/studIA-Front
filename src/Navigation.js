@@ -11,7 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
 import TusMaterias from "./screens/TusMaterias";
-import RegistroNotas from "./screens/RegistroNotas";
+import PerfilMateria from "./screens/PerfilMateria";
 
 
 const Stack = createNativeStackNavigator();
@@ -35,7 +35,7 @@ const Navigation = () => {
     React.useEffect(() => {
         setTimeout(() => {
             setLoaded(true);
-        }, 3000);
+        }, 1000);
     }, []);
 
     if (!fontsLoaded) {
@@ -53,21 +53,15 @@ const Navigation = () => {
                     />
                 ) : (
                     <>
-
-                        <Stack.Screen
-                            name="RegistroNotas"
-                            component={RegistroNotas}
-                            options={{headerShown: false}}
-                        />
                         <Stack.Screen
                             name="Tabs"
                             component={TabsNav}
                             options={{ headerShown: false }}
                         />
                         <Stack.Screen
-                            name="InicioSesion"
-                            component={InicioSesion}
-                            options={{headerShown: false}}
+                            name="RegistroNotas"
+                            component={PerfilMateria}
+                            options={{headerShown: true}}
                         />
                         <Stack.Screen
                             name="TusMaterias"
@@ -78,6 +72,11 @@ const Navigation = () => {
                         <Stack.Screen
                             name="Nota"
                             component={Nota}
+                            options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="InicioSesion"
+                            component={InicioSesion}
                             options={{headerShown: false}}
                         />
                     </>

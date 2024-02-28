@@ -5,6 +5,7 @@ import {useNavigation} from "@react-navigation/native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import MateriaInicioCard from "../components/MateriaInicioCard"
 
+
 const Inicio = () => {
     const navigation = useNavigation();
 
