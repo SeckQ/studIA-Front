@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-<<<<<<< HEAD
-import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { Card, Button } from 'react-native-paper';
-=======
 import {View, Text, FlatList, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, ScrollView} from 'react-native';
 import { Card } from 'react-native-paper';
->>>>>>> test
 import axios from 'axios';
 import Modal from 'react-native-modal';
-import Navigation from "../Navigation";
 import MyTabs from "../MyTabs";
 
-<<<<<<< HEAD
-const TusMaterias = () => {
-    const [subjects, setSubjects] = useState([]);
-=======
+
 const colors = [
     "#FF5733",
     "#33FF57",
@@ -49,74 +41,25 @@ const TusMaterias = () => {
     const [newProfessor, setNewProfessor] = useState('');
     const [newSemester, setNewSemester] = useState(0);
     const [shouldUpdate, setShouldUpdate] = useState(false);
->>>>>>> test
+
 
     useEffect(() => {
         const fetchSubjects = async () => {
             try {
                 const response = await axios.get('http://127.0.0.1:5000/subjects/1');
                 setSubjects(response.data.subjects);
-<<<<<<< HEAD
+
                 console.log(subjects)
-=======
->>>>>>> test
+
             } catch (error) {
                 console.error('Error fetching Subjects:', error);
             }
         };
-<<<<<<< HEAD
+
         console.log(subjects);
         fetchSubjects();
     }, []);
 
-//     const renderSubjectItem = ({ item }) => (
-//
-//         <View style={styles.listItemContainer}>
-//             <Text style={styles.subjectName}>{item.name}</Text>
-//             <Text style={styles.subjectProfessor}>Professor: {item.professor}</Text>
-//             <Text style={styles.subjectSemester}>Semester: {item.semester}</Text>
-//         </View>
-//     );
-//
-//     return (
-//         <View style={styles.container}>
-//             <FlatList
-//                 data={subjects}
-//                 keyExtractor={(item) => item.subject_id.toString()}
-//                 renderItem={renderSubjectItem}
-//             />
-//         </View>
-//     );
-// };
-//
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: '#f8f8f8',
-//         paddingHorizontal: 20,
-//         paddingTop: 20,
-//     },
-//     listItemContainer: {
-//         marginBottom: 20,
-//         padding: 10,
-//         backgroundColor: '#fff',
-//         borderRadius: 10,
-//     },
-//     subjectName: {
-//         fontSize: 18,
-//         fontWeight: 'bold',
-//         marginBottom: 5,
-//         color: '#333',
-//     },
-//     subjectProfessor: {
-//         fontSize: 16,
-//         color: '#666',
-//     },
-//     subjectSemester: {
-//         fontSize: 16,
-//         color: '#666',
-//     },
-// });
     const renderSubjectItem = ({ item }) => (
         <Card style={styles.card}>
             <Card.Title title={item.name} subtitle={`Professor: ${item.professor}`} />
@@ -138,7 +81,6 @@ const TusMaterias = () => {
                 renderItem={renderSubjectItem}
             />
         </View>
-=======
         fetchSubjects();
     }, [shouldUpdate]);
 
@@ -254,23 +196,17 @@ const TusMaterias = () => {
             </View>
             <MyTabs/>
         </ScrollView>
->>>>>>> test
+
     );
 };
 
 const styles = StyleSheet.create({
-<<<<<<< HEAD
     container: {
         flex: 1,
         backgroundColor: '#f8f8f8',
         paddingHorizontal: 20,
         paddingTop: 20,
     },
-    card: {
-        width: "30%",
-        height: "30%",
-        marginBottom: 20,
-=======
     card: {
         marginTop: 10,
         marginBottom: 10,
@@ -351,7 +287,6 @@ const styles = StyleSheet.create({
     modalButtonText: {
         color: '#FFFFFF',
         fontWeight: 'bold',
->>>>>>> test
     },
 });
 
