@@ -162,7 +162,7 @@ const TusMaterias = () => {
                     </View>
                 </Modal>
             </View>
-            <MyTabs/>
+
         </ScrollView>
     );
 };
