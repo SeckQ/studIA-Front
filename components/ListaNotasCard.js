@@ -4,6 +4,7 @@ import {Card, Chip, Icon, Button} from "react-native-paper";
 import {useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 import AvatarComponent from "./AvatarComponent";
+import AvatarNote from "./AvatarNote";
 
 const ListaNotasCard = ({nota}) => {
 
@@ -29,7 +30,7 @@ const ListaNotasCard = ({nota}) => {
             <TouchableOpacity onPress={handlePress}>
                 <View style={styles.container}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        {/*<AvatarComponent></AvatarComponent>*/}
+                        <AvatarNote nota={nota}></AvatarNote>
                         <View style={{ marginLeft: 10 }}>
                             <View style={{ flexDirection: 'row'}}>
                                 <Text style={{ fontWeight: 'bold', fontSize: 14 }} numberOfLines={1}>

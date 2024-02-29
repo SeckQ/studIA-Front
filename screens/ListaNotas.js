@@ -60,8 +60,8 @@ const ListaNotas = ({ route }) => {
             <Appbar.Header>
                 <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ alignItems: 'flex-start' }}>
-                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Tus Apuntes</Text>
-                        <Text style={{ fontSize: 16, color: "#939393FF" }}>Elige sobre qué quieres estudiar</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20, marginLeft:10 }}>Tus Apuntes</Text>
+                        <Text style={{ fontSize: 16, color: "#939393FF" , marginLeft:10}}>Elige sobre qué quieres estudiar</Text>
                     </View>
                     <Icon
                         source="alpha-a-circle"
@@ -97,6 +97,7 @@ const ListaNotas = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        marginTop:20,
     },
     fab: {
         position: 'absolute',

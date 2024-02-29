@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 const Calificacion = ({ route }) => {
     const navigation = useNavigation();
 
-    const { preguntas, calificacion, materiaId } = route.params;
+    const { preguntas, calificacion } = route.params;
 
     const revisarCorreccion = () => {
         // Navegar a la pantalla de corrección
@@ -16,9 +16,9 @@ const Calificacion = ({ route }) => {
         });
     };
 
-    const regresarListaNotas = () => {
-        // Navegar a la pantalla ListaNotas
-        navigation.navigate('ListaNotas', {materiaId});
+    const finalizar = () => {
+        // Navegar a la pantalla inicio
+        navigation.navigate('MainTabs');
     };
 
     return (
@@ -30,8 +30,8 @@ const Calificacion = ({ route }) => {
                 </Button>
             </View>
             <View style={styles.buttonContainer}>
-                <Button mode="contained" onPress={regresarListaNotas} style={styles.button}>
-                    Regresar a Lista de Notas
+                <Button mode="contained" onPress={finalizar} style={styles.button}>
+                    Finalizar
                 </Button>
             </View>
         </View>

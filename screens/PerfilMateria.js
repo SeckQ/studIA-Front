@@ -57,7 +57,7 @@ const PerfilMateria = ({route}) => {
   return (
 
       <SafeAreaView style={{...StyleSheet.absoluteFillObject, backgroundColor: "#ffffff"}}>
-        <ScrollView contentContainerStyle={{marginTop:15, gap: 10}}>
+        <ScrollView contentContainerStyle={{marginTop:2, gap: 10}}>
           <Appbar.Header>
             {materia && <AvatarComponent materia={materia}></AvatarComponent>}
           </Appbar.Header>

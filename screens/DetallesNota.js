@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { Picker } from "@react-native-picker/picker";
-import { Text, TextInput, RadioButton, Button as PaperButton } from 'react-native-paper';
+import { Text, TextInput, RadioButton, Button as PaperButton, Card } from 'react-native-paper';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native'; // Importa useNavigation para la navegación
+import { useNavigation } from '@react-navigation/native';
+import {ImageBackground} from "expo-image"; // Importa useNavigation para la navegación
 import Config from "../config/Config";
 
 const DetallesNota = ({ route }) => {
@@ -92,69 +93,93 @@ const DetallesNota = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Agrega los detalles</Text>
-            <View style={styles.content}>
-                <TextInput
-                    label="Título de la Nota"
-                    value={titulo}
-                    onChangeText={handleTituloChange}
-                    style={styles.input}
-                />
-                <Text>Tipo:</Text>
-                <Picker
-                    selectedValue={selectedType}
-                    onValueChange={handleTypeChange}
-                    style={styles.picker}
-                >
-                    {types.map(type => (
-                        <Picker.Item key={type.type_id} label={type.type_name} value={type.type_id} />
-                    ))}
-                </Picker>
-                <Text>Tema:</Text>
-                <Picker
-                    selectedValue={selectedTopic}
-                    onValueChange={handleTopicChange}
-                    style={styles.picker}
-                >
-                    {topics.map(topic => (
-                        <Picker.Item key={topic.topic_id} label={topic.topic_name} value={topic.topic_id} />
-                    ))}
-                </Picker>
-                <View style={styles.radioButtonContainer}>
-                    <Text>Es Aprendizaje:</Text>
-                    <RadioButton
-                        value="learning"
-                        status={isLearning ? 'checked' : 'unchecked'}
-                        onPress={handleIsLearningChange}
-                    />
-                </View>
-                {isLearning && (
-                    <View>
-                        <Text>Intervalo de Repetición:</Text>
+            <ImageBackground source={require('../assets/Fondo.png')} style={styles.backgroundImage}>
+                <View style={styles.contentContainer}>
+                    <Text style={styles.title}>Agrega los detalles</Text>
+                    <View style={styles.content}>
+                        <TextInput
+                            label="Título de la Nota"
+                            value={titulo}
+                            onChangeText={handleTituloChange}
+                            style={styles.input}
+                            theme={{
+                                colors: {
+                                    primary: '#7930D8FF', // Color del borde y del texto cuando el input no está enfocado
+                                },
+                            }}
+                            mode="outlined" // Añade bordes alrededor del input
+                        />
+                        <Text style={styles.tituloDetalle}>Tipo:</Text>
                         <Picker
-                            selectedValue={repetitionInterval}
-                            onValueChange={(itemValue) => setRepetitionInterval(itemValue)}
+                            selectedValue={selectedType}
+                            onValueChange={handleTypeChange}
                             style={styles.picker}
                         >
-                            <Picker.Item label="1 día" value={1} />
-                            <Picker.Item label="2 días" value={2} />
-                            <Picker.Item label="3 días" value={3} />
+                            {types.map(type => (
+                                <Picker.Item key={type.type_id} label={type.type_name} value={type.type_id} />
+                            ))}
                         </Picker>
+                        <Text style={styles.tituloDetalle}>Tema:</Text>
+                        <Picker
+                            selectedValue={selectedTopic}
+                            onValueChange={handleTopicChange}
+                            style={styles.picker}
+                        >
+                            {topics.map(topic => (
+                                <Picker.Item key={topic.topic_id} label={topic.topic_name} value={topic.topic_id} />
+                            ))}
+                        </Picker>
+                        <View style={styles.radioButtonContainer}>
+                            <Text style={styles.tituloDetalle}>Es Aprendizaje:</Text>
+                            <RadioButton
+                                value="learning"
+                                status={isLearning ? 'checked' : 'unchecked'}
+                                onPress={handleIsLearningChange}
+                            />
+                        </View>
+                        {isLearning && (
+                            <View>
+                                <Text style={styles.tituloDetalle}>Intervalo de Repetición:</Text>
+                                <Picker
+                                    selectedValue={repetitionInterval}
+                                    onValueChange={(itemValue) => setRepetitionInterval(itemValue)}
+                                    style={styles.picker}
+                                >
+                                    <Picker.Item label="1 día" value={1} />
+                                    <Picker.Item label="2 días" value={2} />
+                                    <Picker.Item label="3 días" value={3} />
+                                </Picker>
+                            </View>
+                        )}
+                        <Text style={styles.tituloDetalle}>Fecha de Creación:</Text>
+                        <TextInput
+                            value={creationDate}
+                            editable={false}
+                            style={styles.input}
+                            mode="outlined"
+                            theme={{
+                                colors: {
+                                    primary: '#7930D8FF',
+                                    outlinedColor: '#7930D8FF',
+                                },
+                            }}
+
+                        />
+                        {loading ? (
+                            <ActivityIndicator size="large" color="#0000ff" />
+                        ) : (
+                            <Text>{message}</Text>
+                        )}
+                        <View style={{justifyContent: 'center', alignItems: 'center' }}>
+                            <Card.Actions >
+                                <PaperButton icon="content-save" onPress={handleSave} style={{ backgroundColor: '#7930D8', paddingLeft: 20, paddingRight:20 }} mode="contained" labelStyle={{ fontSize: 16, padding: 0 }}>
+                                    Guardar
+                                </PaperButton>
+                            </Card.Actions>
+                        </View>
                     </View>
-                )}
-                <Text>Fecha de Creación:</Text>
-                <TextInput
-                    value={creationDate}
-                    editable={false}
-                    style={styles.input}
-                />
-                {loading ? (
-                    <ActivityIndicator size="large" color="#0000ff" />
-                ) : (
-                    <Text>{message}</Text>
-                )}
-                <PaperButton mode="contained" onPress={handleSave}>Guardar</PaperButton>
-            </View>
+                </View>
+            </ImageBackground>
         </View>
     );
 };
@@ -162,11 +187,21 @@ const DetallesNota = ({ route }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 10,
+    },
+    backgroundImage: {
+        flex: 1,
+        height: '50%',
+        width: '100%',
+        resizeMode: "cover",
+        justifyContent: "center",
+    },
+    contentContainer: {
+        flex: 1,
         justifyContent: 'center',
+        alignItems: 'center',
     },
     content: {
-        width: '100%',
+        width: '95%', // Ajusta el ancho del contenido según tus necesidades
     },
     title: {
         fontSize: 20,
@@ -176,6 +211,8 @@ const styles = StyleSheet.create({
     },
     input: {
         marginBottom: 10,
+        borderRadius: 8, // Añade bordes curvos
+        backgroundColor: '#e3e3e3',
     },
     picker: {
         marginBottom: 10,
@@ -185,6 +222,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 10,
     },
+    tituloDetalle: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        marginTop: 10,
+        marginBottom: 10,
+    },
 });
+
 
 export default DetallesNota;

@@ -19,7 +19,7 @@ const InicioSesion = () => {
         password: password,
       });
       if(response.data.authenticated){
-        navigation.navigate("Inicio")
+        navigation.navigate("MainTabs")
       } else {
         Alert.alert('Error','Credenciales incorrectas');
       }

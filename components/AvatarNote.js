@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar } from "react-native-paper";
 
-const AvatarCard = ({ materia }) => {
+const AvatarCard = ({ nota }) => {
     const colors = [
         "#FF5733",
         "#33FF57",
@@ -28,9 +28,9 @@ const AvatarCard = ({ materia }) => {
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     return (
         <Avatar.Text
-            size={80}
-            label={materia.name.charAt(0).toUpperCase()}
-            style={{ backgroundColor: randomColor , marginLeft:10}}
+            size={50}
+            label={nota.title.charAt(0).toUpperCase()}
+            style={{ backgroundColor: randomColor }}
         />
     );
 };
