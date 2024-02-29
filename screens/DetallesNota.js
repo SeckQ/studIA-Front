@@ -8,7 +8,7 @@ import Config from "../config/Config";
 
 const DetallesNota = ({ route }) => {
     const navigation = useNavigation(); // Obtiene la instancia de navegación
-    const { contenido } = route.params;
+    const { contenido, materiaId } = route.params;
     const [titulo, setTitulo] = useState('');
     const [types, setTypes] = useState([]);
     const [selectedType, setSelectedType] = useState(null);
@@ -70,13 +70,13 @@ const DetallesNota = ({ route }) => {
                 note_type_id: selectedType,
                 creation_date: creationDate,
                 last_modification_date: getCurrentDate(),
-                subject_id: 1,
+                subject_id: materiaId,
                 islearning: isLearning ? 1 : 0,
                 repetition_interval: repetitionInterval,
                 user_id: 1,
             });
             Alert.alert('Nota creada exitosamente'); // Muestra el mensaje de alerta
-            navigation.navigate('Nota'); // Redirige a otra pantalla
+            navigation.navigate('ListaNotas',{materiaId: materiaId}); // Redirige a otra pantalla
         } catch (error) {
             console.error('Error al crear la nota:', error);
             setMessage('Error al crear la nota');

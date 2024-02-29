@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
-import PreguntaCard from '../components/PreguntaCard';
 import { Button } from 'react-native-paper';
 import axios from 'axios';
 import Config from "../config/Config";
-
+import { useNavigation } from '@react-navigation/native';
+import PreguntaCard from "../components/PreguntaCard";
 
 const Repaso = ({ route }) => {
+  const navigation = useNavigation();
   const [preguntas, setPreguntas] = useState([]);
   const [preguntaActual, setPreguntaActual] = useState(0);
   const [respuestasUsuario, setRespuestasUsuario] = useState([]);
   const [cargando, setCargando] = useState(true);
   const { content } = route.params;
 
+  console.log(content);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('CONTENT ENVIADO', content);
         const response = await axios.post(`${Config.apiUrl}/generate-questions`, {
-          text: content, // Utiliza el contenido pasado como texto para generar preguntas
-          quantity: 3,
+          text: content,
+          quantity: 4,
           temperature: 0.8
         });
         const { preguntas_y_respuestas } = response.data;
         setPreguntas(preguntas_y_respuestas);
-        setCargando(false); // Cambiar el estado de carga a falso una vez que las preguntas se carguen
+        setCargando(false);
       } catch (error) {
         console.error('Error al obtener las preguntas:', error);
-        setCargando(false); // En caso de error, cambiar el estado de carga a falso
+        setCargando(false);
       }
     };
 
@@ -46,19 +48,28 @@ const Repaso = ({ route }) => {
   };
 
   const finalizarRepaso = () => {
-    console.log('Repaso finalizado');
-    console.log('Respuestas seleccionadas por el usuario:', respuestasUsuario);
-
+    // Calcular la calificación
     const respuestasCorrectas = preguntas.map(pregunta => pregunta['Respuesta correcta']);
     console.log('Respuestas correctas:', respuestasCorrectas);
+    console.log('Respuestas del usuario:', respuestasUsuario);
 
-    let respuestasCorrectasUsuario = 0;
-    for (let i = 0; i < respuestasUsuario.length; i++) {
-      if (respuestasUsuario[i] === respuestasCorrectas[i]) {
-        respuestasCorrectasUsuario++;
-      }
-    }
-    console.log('Respuestas correctas del usuario:', respuestasCorrectasUsuario);
+    const respuestasCorrectasUsuario = respuestasUsuario.filter((respuesta, index) => respuesta === respuestasCorrectas[index]).length;
+    const calificacion = (respuestasCorrectasUsuario / preguntas.length) * 100;
+
+    // Obtener las preguntas completas con sus respuestas y enviarlas a la pantalla de calificación
+    const preguntasCompletas = preguntas.map((pregunta, index) => ({
+      pregunta: pregunta.Pregunta,
+      respuestaCorrecta: pregunta.Opciones[pregunta['Respuesta correcta'] - 1],
+      respuestaUsuario: pregunta.Opciones[respuestasUsuario[index] - 1]
+    }));
+
+    // Navegar a la pantalla de calificación y pasar los parámetros
+
+    //console.log("Salida de repaso",preguntasCompletas)
+    navigation.navigate('Calificacion', {
+      preguntas: preguntasCompletas,
+      calificacion
+    });
   };
 
   return (

@@ -17,6 +17,8 @@ import RegistroNotas from "./screens/RegistroNotas";
 import ListaNotas from "./screens/ListaNotas";
 import DetallesNota from "./screens/DetallesNota";
 import TusMaterias from "./screens/TusMaterias";
+import Calificacion from "./screens/Calificacion";
+import Correccion from "./screens/Correccion";
 
 const Stack = createNativeStackNavigator();
 
@@ -124,7 +126,16 @@ export default function App() {
                             component={DetallesNota}
                             options={{headerShown: false}}
                         />
-
+                        <Stack.Screen
+                            name="Calificacion"
+                            component={Calificacion}
+                            options={{headerShown: false}}
+                        />
+                        <Stack.Screen
+                            name="Correccion"
+                            component={Correccion}
+                            options={{headerShown: false}}
+                        />
                     </>
                 )}
             </Stack.Navigator>

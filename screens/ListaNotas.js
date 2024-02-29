@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { Card, Button, Title, Paragraph, FAB } from 'react-native-paper'; // Importamos FAB desde react-native-paper
+import { Card, Button, Title, Paragraph, FAB, Appbar, Icon } from 'react-native-paper';
 import axios from 'axios';
 import Config from "../config/Config";
+import { useNavigation } from "@react-navigation/native";
+import ListaNotasCard from "../components/ListaNotasCard";
 
-
-const ListaNotas = ({ navigation }) => {
+const ListaNotas = ({ route }) => {
     const [notas, setNotas] = useState([]);
     const [loading, setLoading] = useState(true);
     const [expandedId, setExpandedId] = useState(null);
+    const navigation = useNavigation();
+    const { materiaId } = route.params;
 
     useEffect(() => {
         const fetchNotas = async () => {
             try {
-                const response = await axios.get(`${Config.apiUrl}/notes/1`);
+                const response = await axios.get(`${Config.apiUrl}/notes/1/${materiaId}`);
                 const notasData = await Promise.all(response.data.notes.map(async (nota) => {
                     const topicResponse = await axios.get(`${Config.apiUrl}/topics/1/${nota.topic_id}`);
                     const topicName = topicResponse.data.topic_name;
@@ -22,8 +25,10 @@ const ListaNotas = ({ navigation }) => {
                         topic: topicName,
                     };
                 }));
+                console.log('Notas Data',notasData);
                 setNotas(notasData);
                 setLoading(false);
+
             } catch (error) {
                 console.error('Error al obtener las notas:', error);
                 setLoading(false);
@@ -33,50 +38,40 @@ const ListaNotas = ({ navigation }) => {
         fetchNotas();
     }, []);
 
-    const handleRepaso = (content) => {
-        navigation.navigate('Repaso', { content });
-    };
 
     const toggleExpand = (noteId) => {
         setExpandedId(expandedId === noteId ? null : noteId);
     };
 
-    const truncateText = (text, limit) => {
-        if (text.length <= limit) {
-            return text;
-        }
-        return text.substring(0, limit) + '...';
-    };
-
     const renderNotas = () => {
         return notas.map((nota) => (
-            <Card key={nota.note_id} style={styles.card}>
-                <TouchableOpacity onPress={() => toggleExpand(nota.note_id)}>
-                    <Card.Title
-                        title={nota.title}
-                        subtitle={`Tema: ${nota.topic}\nFecha de Creación: ${nota.creation_date}`}
-                        titleStyle={styles.title}
-                        subtitleStyle={styles.subtitle}
-                    />
-                </TouchableOpacity>
-                {expandedId === nota.note_id && (
-                    <Card.Content style={styles.content}>
-                        <Paragraph>{truncateText(nota.content, 100)}</Paragraph>
-                        <View style={styles.buttonContainer}>
-                            <Button mode="contained" onPress={() => handleRepaso(nota.content)} style={styles.button}>
-                                Repaso
-                            </Button>
-                        </View>
-                    </Card.Content>
-                )}
-            </Card>
+            <ListaNotasCard
+                key={nota.note_id}
+                nota={nota}
+                expanded={expandedId === nota.note_id}
+                toggleExpand={() => toggleExpand(nota.note_id)}
+                handleRepaso={() => handleRepaso(nota.content)}
+            />
         ));
     };
 
     return (
         <View style={styles.container}>
-            <Title style={styles.header}>Apuntes</Title>
-            <ScrollView style={{ width: '100%' }}>
+            <Appbar.Header>
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <View style={{ alignItems: 'flex-start' }}>
+                        <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Tus Apuntes</Text>
+                        <Text style={{ fontSize: 16, color: "#939393FF" }}>Elige sobre qué quieres estudiar</Text>
+                    </View>
+                    <Icon
+                        source="alpha-a-circle"
+                        color={"#7930D8FF"}
+                        size={50}
+                    />
+                </View>
+            </Appbar.Header>
+
+            <ScrollView contentContainerStyle={{padding: 20, gap: 10}}>
                 {loading ? (
                     <Text>Cargando notas...</Text>
                 ) : (
@@ -89,10 +84,11 @@ const ListaNotas = ({ navigation }) => {
                     </View>
                 )}
             </ScrollView>
+
             <FAB
                 style={styles.fab}
                 icon="plus"
-                onPress={() => {navigation.navigate('Nota');}}
+                onPress={() => { navigation.navigate('Nota', {materiaId: materiaId}); }}
             />
         </View>
     );
@@ -101,35 +97,6 @@ const ListaNotas = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        marginTop: 40, // Añade margen superior
-    },
-    header: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 20,
-    },
-    card: {
-        marginVertical: 10,
-        width: '100%',
-    },
-    title: {
-        fontWeight: 'bold',
-    },
-    subtitle: {
-        fontSize: 14,
-    },
-    content: {
-        marginTop: 10,
-    },
-    buttonContainer: {
-        alignItems: 'flex-end',
-        marginTop: 10,
-    },
-    button: {
-        borderWidth: 1,
     },
     fab: {
         position: 'absolute',

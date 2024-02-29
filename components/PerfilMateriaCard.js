@@ -4,7 +4,7 @@ import {useNavigation} from "@react-navigation/native";
 
 
 
-const PerfilMateriaInformacion = () => {
+const PerfilMateriaInformacion = ({materiaId}) => {
 
     const navigation = useNavigation();
 
@@ -19,7 +19,7 @@ const PerfilMateriaInformacion = () => {
                     )}
                 />
                 <Appbar.Content title="Apuntes" />
-                <Appbar.Action icon="chevron-right" size={30} onPress={() => {navigation.navigate('ListaNotas');}} />
+                <Appbar.Action icon="chevron-right" size={30} onPress={() => {navigation.navigate('ListaNotas',{materiaId});}} />
             </Appbar.Header>
         </View>
     );

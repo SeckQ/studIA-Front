@@ -92,7 +92,7 @@ const PerfilMateria = ({route}) => {
           </View>
 
 
-          <PerfilMateriaCard></PerfilMateriaCard>
+          <PerfilMateriaCard materiaId={materiaId}></PerfilMateriaCard>
 
 
           <View>

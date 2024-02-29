@@ -1,19 +1,20 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Button } from 'react-native-paper';
-import { useNavigation } from '@react-navigation/native'; // Importa useNavigation
+import { useNavigation } from '@react-navigation/native';
 import { RichEditor, RichToolbar } from 'react-native-pell-rich-editor';
 import { actions } from './const';
 
-const Nota = () => {
+const Nota = ({route}) => {
     const richText = useRef();
     const [formattedText, setFormattedText] = useState('');
-    const navigation = useNavigation(); // Obtiene la navegación
+    const navigation = useNavigation();
+    const {materiaId} = route.params;
 
     const handleSaveFormattedText = async () => {
         const html = await richText.current?.getContentHtml();
         setFormattedText(html);
-        navigation.navigate('DetallesNota', { contenido: html }); // Navega a NuevaPantalla y pasa el contenido
+        navigation.navigate('DetallesNota', { contenido: html, materiaId: materiaId  });
     };
 
     const handleCancel = () => {
@@ -54,6 +55,14 @@ const Nota = () => {
                     'fontSize',
                     'link',
                 ]}
+                iconMap={{
+                    heading1: require('../assets/h1.png'),
+                    heading2: require('../assets/h2.png'),
+                    heading3: require('../assets/h3.png'),
+                    heading4: require('../assets/h4.png'),
+                    heading5: require('../assets/h5.png'),
+                    heading6: require('../assets/h6.png'),
+                }}
             />
             <View style={styles.buttonContainer}>
                 <Button mode="outlined" onPress={handleCancel} color="red" style={styles.button}>
