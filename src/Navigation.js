@@ -12,6 +12,7 @@ import Notificaciones from "./screens/Notificaiones";
 import Perfil from "./screens/Perfil";
 import TusMaterias from "./screens/TusMaterias";
 import PerfilMateria from "./screens/PerfilMateria";
+import DetalleNotas from "./screens/DetalleNotas";
 
 
 const Stack = createNativeStackNavigator();
@@ -35,7 +36,7 @@ const Navigation = () => {
     React.useEffect(() => {
         setTimeout(() => {
             setLoaded(true);
-        }, 1000);
+        }, 5000);
     }, []);
 
     if (!fontsLoaded) {
@@ -111,7 +112,7 @@ function TabsNav() {
                 };
             }}
         >
-            <Tabs.Screen name="Inicio" component={Inicio} />
+            <Tabs.Screen name="Inicio" component={DetalleNotas} />
             <Tabs.Screen name="Notificaciones" component={Notificaciones} />
             <Tabs.Screen name="Perfil" component={Perfil} />
         </Tabs.Navigator>
