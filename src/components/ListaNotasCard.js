@@ -8,6 +8,8 @@ const ListaNotasCard = () => {
 
     const [expanded, setExpanded] = useState(false);
     const navigation = useNavigation();
+    const nombre = "Maldito juancho nos trata como esclavos y no nos da ni cafecito";
+
 
     const handlePress = () => {
         setExpanded(!expanded);
@@ -24,7 +26,11 @@ const ListaNotasCard = () => {
                             size={50}
                         />
                         <View style={{ marginLeft: 10 }}>
-                            <Text style={{ fontWeight: 'bold', fontSize: 14 }}>Nombre</Text>
+                            <View style={{ flexDirection: 'row'}}>
+                                <Text style={{ fontWeight: 'bold', fontSize: 14 }} numberOfLines={1}>
+                                    {nombre.length > 16 ? `${nombre.substring(0, 16)}...` : nombre}
+                                </Text>
+                            </View>
                             <Text style={{ fontSize: 14, color: "#939393FF" }}>Fecha</Text>
                         </View>
                     </View>

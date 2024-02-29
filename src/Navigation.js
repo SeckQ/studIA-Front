@@ -76,6 +76,12 @@ const Navigation = () => {
                 ) : (
                     <>
                         <Stack.Screen
+                            name="InicioSesion"
+                            component={InicioSesion}
+                            options={{ headerShown: false }}
+                        />
+
+                        <Stack.Screen
                             name="MainTabs"
                             component={MainTabs}
                             options={{ headerShown: false }}
@@ -111,11 +117,7 @@ const Navigation = () => {
                             options={{ headerShown: false }}
                         />
 
-                        <Stack.Screen
-                            name="InicioSesion"
-                            component={InicioSesion}
-                            options={{ headerShown: false }}
-                        />
+
 
                         <Stack.Screen
                             name="TusMaterias"
