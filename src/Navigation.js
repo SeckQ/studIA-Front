@@ -32,22 +32,22 @@ const MainTabs = () => {
                 }}
             />
             <Tab.Screen
-                name={'Notificaciones'}
-                component={Notificaciones}
+                name={'TusMaterias'}
+                component={TusMaterias}
                 options={{
-                    tabBarLabel: 'Notificaciones',
+                    tabBarLabel: 'Tus Materias',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name={'bell-ring'} color={color} size={size} />
+                        <MaterialCommunityIcons name={'book'} color={color} size={size} />
                     )
                 }}
             />
             <Tab.Screen
-                name={'Perfil'}
-                component={Perfil}
+                name={'DetallesNota'}
+                component={DetallesNota}
                 options={{
-                    tabBarLabel: 'Perfil',
+                    tabBarLabel: 'Notas',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name={'account'} color={color} size={size} />
+                        <MaterialCommunityIcons name={'grade'} color={color} size={size} />
                     )
                 }}
             />
